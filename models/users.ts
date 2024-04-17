@@ -1,4 +1,7 @@
-/* const User = db.define("users", {
+import { DataTypes } from "sequelize";
+import db from "../db/connection";
+
+const User = db.define("users", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -18,4 +21,4 @@
   },
 });
 
-export default User; */
+export default User;
