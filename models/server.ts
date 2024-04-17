@@ -1,4 +1,6 @@
 import express, { Application } from "express";
+import cors from "cors";
+import db from "../db/connection";
 
 class Server {
   private app: Application;
@@ -6,6 +8,29 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "8000";
+
+    this.dbConnection();
+    this.middelwares();
+  }
+
+  async dbConnection() {
+    try {
+      await db.authenticate();
+      console.log("Database online");
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  middelwares() {
+    // CORS
+    this.app.use(cors());
+
+    // Lectura del body
+    this.app.use(express.json());
+
+    // Carpeta publica
+    this.app.use(express.static("public"));
   }
 
   listen() {
