@@ -23,11 +23,15 @@ const Purchase = db.define("purchases", {
   },
   cantidad: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    defaultValue: 1,
   },
   fecha_de_compra: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
+  },
+  total_price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
   },
 });
 
