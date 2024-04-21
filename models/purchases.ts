@@ -35,7 +35,6 @@ const Purchase = db.define("purchases", {
   },
 });
 
-Purchase.belongsTo(User, { foreignKey: "user_id" });
 Purchase.belongsTo(Ticket, { foreignKey: "ticket_type_id" });
 
 export default Purchase;

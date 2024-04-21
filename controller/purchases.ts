@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-import { amountToPay } from "../helpers/amountToPay";
 
 import User from "../models/users";
 import Ticket from "../models/tickets";
@@ -20,7 +19,7 @@ export const getAllPurchases = async (req: Request, res: Response) => {
     ],
   });
 
-  res.json({ purchases });
+  res.json(purchases);
 };
 
 export const postPurchase = async (req: Request, res: Response) => {
@@ -48,7 +47,7 @@ export const postPurchase = async (req: Request, res: Response) => {
       });
     }
 
-    body.total_price = amountToPay(body.ticket_type_id, body.cantidad);
+    body.total_price = noTickets[0].dataValues.precio * body.cantidad;
 
     const purcahse = await Purchase.create(body);
 
@@ -62,7 +61,6 @@ export const postPurchase = async (req: Request, res: Response) => {
     );
 
     res.status(200).json({
-      msg: "Purchase ",
       purcahse,
     });
   } catch (error) {
