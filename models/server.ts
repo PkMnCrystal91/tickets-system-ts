@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import purchasesRouter from "../routes/purchases";
 import usersRouter from "../routes/users";
+import ticketsRouter from "../routes/tickets";
 import db from "../db/connection";
 
 class Server {
@@ -10,6 +11,7 @@ class Server {
   private apiPaths = {
     purchases: "/api/purchases",
     users: "/api/users",
+    tickets: "/api/tickets",
   };
   constructor() {
     this.app = express();
@@ -44,6 +46,7 @@ class Server {
   routes() {
     this.app.use(this.apiPaths.purchases, purchasesRouter);
     this.app.use(this.apiPaths.users, usersRouter);
+    this.app.use(this.apiPaths.tickets, ticketsRouter);
   }
 
   listen() {
