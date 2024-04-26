@@ -22,7 +22,7 @@ const User = db.define("users", {
   },
 });
 
-User.hasMany(Purchase, { foreignKey: "user_id" });
-Purchase.belongsTo(User, { foreignKey: "user_id" });
+/* User.hasMany(Purchase, { foreignKey: "user_id" });
+Purchase.belongsTo(User, { foreignKey: "user_id" }); */
 
 export default User;

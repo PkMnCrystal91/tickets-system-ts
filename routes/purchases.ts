@@ -1,4 +1,4 @@
-import { Router } from "express";
+/* import { Router } from "express";
 import { getAllPurchases, postPurchase } from "../controller/purchases";
 
 const router = Router();
@@ -7,4 +7,4 @@ const router = Router();
 router.get("/", getAllPurchases);
 router.post("/", postPurchase);
 
-export default router;
+export default router; */

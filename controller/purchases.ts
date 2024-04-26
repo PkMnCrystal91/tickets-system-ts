@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 
-import User from "../models/users";
+/* import User from "../models/users";
 import Ticket from "../models/tickets";
 import Purchase from "../models/purchases";
 
@@ -70,3 +70,4 @@ export const postPurchase = async (req: Request, res: Response) => {
     });
   }
 };
+ */

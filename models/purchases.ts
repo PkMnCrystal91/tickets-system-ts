@@ -1,11 +1,10 @@
 import { DataTypes } from "sequelize";
-import User from "./users";
-import Ticket from "./tickets";
-
 import db from "../db/connection";
+import User from "./users";
+import Cart from "./carts";
 
 const Purchase = db.define("purchases", {
-  user_id: {
+  UserID: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -13,28 +12,23 @@ const Purchase = db.define("purchases", {
       key: "id",
     },
   },
-  ticket_type_id: {
+  CartID: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Ticket,
+      model: Cart,
       key: "id",
     },
   },
-  cantidad: {
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
-  },
-  fecha_de_compra: {
+
+  PurchaseDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
-  total_price: {
+  TotalAmount: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
 });
-
-Purchase.belongsTo(Ticket, { foreignKey: "ticket_type_id" });
 
 export default Purchase;

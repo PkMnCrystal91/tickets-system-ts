@@ -1,18 +1,13 @@
 import express, { Application } from "express";
 import cors from "cors";
-import purchasesRouter from "../routes/purchases";
 import usersRouter from "../routes/users";
-import ticketsRouter from "../routes/tickets";
+
 import db from "../db/connection";
 
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths = {
-    purchases: "/api/purchases",
-    users: "/api/users",
-    tickets: "/api/tickets",
-  };
+  private apiPaths = {};
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "8000";
@@ -43,11 +38,7 @@ class Server {
     this.app.use(express.static("public"));
   }
 
-  routes() {
-    this.app.use(this.apiPaths.purchases, purchasesRouter);
-    this.app.use(this.apiPaths.users, usersRouter);
-    this.app.use(this.apiPaths.tickets, ticketsRouter);
-  }
+  routes() {}
 
   listen() {
     this.app.listen(this.port, () => {
