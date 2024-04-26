@@ -1,6 +1,7 @@
 import { DataTypes, Sequelize } from "sequelize";
 import db from "../db/connection";
 import User from "./users";
+import PorductsInCart from "./productsInCart";
 
 const Cart = db.define("carts", {
   UserID: {
@@ -15,5 +16,10 @@ const Cart = db.define("carts", {
     allowNull: false,
   },
 });
+
+Cart.hasMany(PorductsInCart, { foreignKey: "CartID" });
+
+// Belongs To, for Users
+PorductsInCart.belongsTo(Cart, { foreignKey: "CartID" });
 
 export default Cart;

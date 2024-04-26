@@ -1,6 +1,7 @@
 import { DataTypes, Sequelize } from "sequelize";
 import db from "../db/connection";
 import Purchase from "./purchases";
+import Cart from "./carts";
 
 const User = db.define("users", {
   fullname: {
@@ -23,6 +24,10 @@ const User = db.define("users", {
 });
 
 User.hasMany(Purchase, { foreignKey: "UserID" });
+User.hasMany(Cart, { foreignKey: "UserID" });
+
+// Belongs To, for Users
 Purchase.belongsTo(User, { foreignKey: "UserID" });
+Cart.belongsTo(User, { foreignKey: "UserID" });
 
 export default User;
