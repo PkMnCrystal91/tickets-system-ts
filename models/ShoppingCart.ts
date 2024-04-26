@@ -1,17 +1,18 @@
 import { DataTypes } from "sequelize";
 import db from "../db/connection";
-import Cart from "./carts";
-import Product from "./products";
 
-const PorductsInCart = db.define("productsincart", {
-  CartID: {
+import Product from "./products";
+import User from "./users";
+
+const ShoppingCart = db.define("shoppingcart", {
+  user_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: Cart,
+      model: User,
       key: "id",
     },
   },
-  ProductID: {
+  product_id: {
     type: DataTypes.INTEGER,
     references: {
       model: Product,
@@ -21,7 +22,12 @@ const PorductsInCart = db.define("productsincart", {
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: 1,
   },
 });
 
-export default PorductsInCart;
+ShoppingCart.hasMany(Product, { foreignKey: "product_id" });
+// Belongs To Product
+Product.belongsTo(ShoppingCart, { foreignKey: "product_id" });
+
+export default ShoppingCart;

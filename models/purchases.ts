@@ -1,7 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../db/connection";
 import User from "./users";
-import Cart from "./carts";
 
 const Purchase = db.define("purchases", {
   UserID: {
@@ -12,15 +11,6 @@ const Purchase = db.define("purchases", {
       key: "id",
     },
   },
-  CartID: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Cart,
-      key: "id",
-    },
-  },
-
   PurchaseDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
