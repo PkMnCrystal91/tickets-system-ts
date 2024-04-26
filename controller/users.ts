@@ -8,7 +8,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     include: [
       {
         model: Purchase,
-        attributes: ["cantidad", "fecha_de_compra", "total_price"], // select the fields you want to include
+        attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
       },
     ],
   });
@@ -26,7 +26,7 @@ export const getUserPurchase = async (req: Request, res: Response) => {
     include: [
       {
         model: Purchase,
-        attributes: ["cantidad", "fecha_de_compra", "total_price"], // select the fields you want to include
+        attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
       },
     ],
   });

@@ -3,16 +3,16 @@ import db from "../db/connection";
 import Purchase from "./purchases";
 
 const User = db.define("users", {
+  fullname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
-  full_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  user_password: {
+  password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -22,7 +22,7 @@ const User = db.define("users", {
   },
 });
 
-/* User.hasMany(Purchase, { foreignKey: "user_id" });
-Purchase.belongsTo(User, { foreignKey: "user_id" }); */
+User.hasMany(Purchase, { foreignKey: "UserID" });
+Purchase.belongsTo(User, { foreignKey: "UserID" });
 
 export default User;

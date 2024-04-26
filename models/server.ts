@@ -7,7 +7,9 @@ import db from "../db/connection";
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths = {};
+  private apiPaths = {
+    users: "/api/users",
+  };
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "8000";
@@ -38,7 +40,9 @@ class Server {
     this.app.use(express.static("public"));
   }
 
-  routes() {}
+  routes() {
+    this.app.use(this.apiPaths.users, usersRouter);
+  }
 
   listen() {
     this.app.listen(this.port, () => {
