@@ -4,7 +4,7 @@ import db from "../db/connection";
 import Product from "./products";
 import User from "./users";
 
-const ShoppingCart = db.define("shoppingcart", {
+const ShoppingCart = db.define("shoppingcarts", {
   user_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -26,8 +26,7 @@ const ShoppingCart = db.define("shoppingcart", {
   },
 });
 
-ShoppingCart.hasMany(Product, { foreignKey: "product_id" });
 // Belongs To Product
-Product.belongsTo(ShoppingCart, { foreignKey: "product_id" });
+ShoppingCart.belongsTo(Product, { foreignKey: "product_id" });
 
 export default ShoppingCart;

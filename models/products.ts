@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import db from "../db/connection";
+import ShoppingCart from "./ShoppingCart";
 
 const Product = db.define("products", {
   name: {

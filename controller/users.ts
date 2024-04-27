@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 
 import User from "../models/users";
 import Purchase from "../models/purchases";
-import Cart from "../models/carts";
+import ShoppingCart from "../models/ShoppingCart";
+import Product from "../models/products";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   const purchases = await User.findAll({
@@ -12,7 +13,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
         attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
       },
       {
-        model: Cart,
+        model: ShoppingCart,
       },
     ],
   });
@@ -22,8 +23,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserPurchase = async (req: Request, res: Response) => {
   const { id } = req.params;
-
-  const purchases = await User.findAll({
+  const purchase = await User.findAll({
     where: {
       id: id,
     },
@@ -33,10 +33,16 @@ export const getUserPurchase = async (req: Request, res: Response) => {
         attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
       },
       {
-        model: Cart,
+        model: ShoppingCart,
       },
     ],
   });
-
-  res.json(purchases);
+  const cartValue = purchase[0].dataValues.shoppingcarts;
+  const videoGame = await Product.findByPk(cartValue[0].dataValues.product_id);
+  res.status(200).json({
+    data: {
+      purchase,
+      videoGame,
+    },
+  });
 };

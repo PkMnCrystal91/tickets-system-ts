@@ -26,7 +26,6 @@ const User = db.define("users", {
 User.hasMany(Purchase, { foreignKey: "user_id" });
 User.hasMany(ShoppingCart, { foreignKey: "user_id" });
 
-// Belongs To, for Users
 Purchase.belongsTo(User, { foreignKey: "user_id" });
 ShoppingCart.belongsTo(User, { foreignKey: "user_id" });
 
