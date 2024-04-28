@@ -47,15 +47,6 @@ export const addToCart = async (req: Request, res: Response) => {
       });
     }
 
-    await Product.decrement(
-      { stock: body.quantity },
-      {
-        where: {
-          id: body.product_id,
-        },
-      }
-    );
-
     const cartItem = await ShoppingCart.create(body);
 
     res.status(200).json({

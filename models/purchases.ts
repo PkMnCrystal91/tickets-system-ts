@@ -17,6 +17,7 @@ const Purchase = db.define("purchases", {
   },
   TotalAmount: {
     type: DataTypes.FLOAT,
+    allowNull: false,
   },
 });
 
