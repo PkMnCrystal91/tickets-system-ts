@@ -2,13 +2,19 @@ import { Request, Response } from "express";
 
 import User from "../models/users";
 import Purchase from "../models/purchases";
+import ShoppingCart from "../models/ShoppingCart";
+import Product from "../models/products";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   const purchases = await User.findAll({
     include: [
       {
         model: Purchase,
-        attributes: ["cantidad", "fecha_de_compra", "total_price"], // select the fields you want to include
+        attributes: ["id", "PurchaseDate", "TotalAmount"], // select the fields you want to include
+      },
+      {
+        model: ShoppingCart,
+        attributes: ["id", "product_id"],
       },
     ],
   });
@@ -18,18 +24,27 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserPurchase = async (req: Request, res: Response) => {
   const { id } = req.params;
-
-  const purchases = await User.findAll({
+  const purchase = await User.findAll({
     where: {
       id: id,
     },
     include: [
       {
         model: Purchase,
-        attributes: ["cantidad", "fecha_de_compra", "total_price"], // select the fields you want to include
+        attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
+      },
+      {
+        model: ShoppingCart,
+        attributes: ["id", "product_id"],
       },
     ],
   });
+  /* const cartValue = purchase[0].dataValues.shoppingcarts; */
 
-  res.json(purchases);
+  console.log(purchase);
+  /* const videoGame = await Product.findByPk(cartValue[0].dataValues.product_id); */
+  res.status(200).json({
+    purchase,
+    /* videoGame, */
+  });
 };

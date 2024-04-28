@@ -1,17 +1,20 @@
 import express, { Application } from "express";
 import cors from "cors";
-import purchasesRouter from "../routes/purchases";
 import usersRouter from "../routes/users";
-import ticketsRouter from "../routes/tickets";
+import productRouter from "../routes/products";
+import cartRouter from "../routes/shoppingCarts";
+import purchasesRoute from "../routes/purchases";
+
 import db from "../db/connection";
 
 class Server {
   private app: Application;
   private port: string;
   private apiPaths = {
-    purchases: "/api/purchases",
     users: "/api/users",
-    tickets: "/api/tickets",
+    products: "/api/products",
+    shoppingCart: "/api/carts",
+    purchases: "/api/purchases",
   };
   constructor() {
     this.app = express();
@@ -44,9 +47,10 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.apiPaths.purchases, purchasesRouter);
     this.app.use(this.apiPaths.users, usersRouter);
-    this.app.use(this.apiPaths.tickets, ticketsRouter);
+    this.app.use(this.apiPaths.products, productRouter);
+    this.app.use(this.apiPaths.shoppingCart, cartRouter);
+    this.app.use(this.apiPaths.purchases, purchasesRoute);
   }
 
   listen() {
