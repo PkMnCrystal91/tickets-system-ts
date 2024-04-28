@@ -3,6 +3,7 @@ import cors from "cors";
 import usersRouter from "../routes/users";
 import productRouter from "../routes/products";
 import cartRouter from "../routes/shoppingCarts";
+import purchasesRoute from "../routes/purchases";
 
 import db from "../db/connection";
 
@@ -13,6 +14,7 @@ class Server {
     users: "/api/users",
     products: "/api/products",
     shoppingCart: "/api/carts",
+    purchases: "/api/purchases",
   };
   constructor() {
     this.app = express();
@@ -48,6 +50,7 @@ class Server {
     this.app.use(this.apiPaths.users, usersRouter);
     this.app.use(this.apiPaths.products, productRouter);
     this.app.use(this.apiPaths.shoppingCart, cartRouter);
+    this.app.use(this.apiPaths.purchases, purchasesRoute);
   }
 
   listen() {

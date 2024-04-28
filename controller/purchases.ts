@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 
-/* import User from "../models/users";
-import Ticket from "../models/tickets";
+import User from "../models/users";
 import Purchase from "../models/purchases";
 
-export const getAllPurchases = async (req: Request, res: Response) => {
+/* export const getAllPurchases = async (req: Request, res: Response) => {
   const purchases = await Purchase.findAll({
     include: [
       {
@@ -20,9 +19,9 @@ export const getAllPurchases = async (req: Request, res: Response) => {
   });
 
   res.json(purchases);
-};
+}; */
 
-export const postPurchase = async (req: Request, res: Response) => {
+/* export const postPurchase = async (req: Request, res: Response) => {
   const { body } = req;
 
   try {
@@ -69,5 +68,21 @@ export const postPurchase = async (req: Request, res: Response) => {
       msg: "Hable con el administrador",
     });
   }
+}; */
+
+export const postPurchase = async (req: Request, res: Response) => {
+  const { body } = req;
+
+  try {
+    const purcahse = await Purchase.create(body);
+
+    res.status(200).json({
+      purcahse,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "Hable con el administrador",
+    });
+  }
 };
- */

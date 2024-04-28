@@ -10,10 +10,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
     include: [
       {
         model: Purchase,
-        attributes: ["PurchaseDate", "TotalAmount"], // select the fields you want to include
+        attributes: ["id", "PurchaseDate", "TotalAmount"], // select the fields you want to include
       },
       {
         model: ShoppingCart,
+        attributes: ["id", "product_id"],
       },
     ],
   });
@@ -34,15 +35,16 @@ export const getUserPurchase = async (req: Request, res: Response) => {
       },
       {
         model: ShoppingCart,
+        attributes: ["id", "product_id"],
       },
     ],
   });
-  const cartValue = purchase[0].dataValues.shoppingcarts;
-  const videoGame = await Product.findByPk(cartValue[0].dataValues.product_id);
+  /* const cartValue = purchase[0].dataValues.shoppingcarts; */
+
+  console.log(purchase);
+  /* const videoGame = await Product.findByPk(cartValue[0].dataValues.product_id); */
   res.status(200).json({
-    data: {
-      purchase,
-      videoGame,
-    },
+    purchase,
+    /* videoGame, */
   });
 };

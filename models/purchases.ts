@@ -3,7 +3,7 @@ import db from "../db/connection";
 import User from "./users";
 
 const Purchase = db.define("purchases", {
-  UserID: {
+  user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -17,7 +17,6 @@ const Purchase = db.define("purchases", {
   },
   TotalAmount: {
     type: DataTypes.FLOAT,
-    allowNull: false,
   },
 });
 
